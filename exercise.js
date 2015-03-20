@@ -16,13 +16,18 @@ function Collection(data) {
     all: function(matchingFunc) {
       var retArr = [];
 
-      for (var i = 0, len = this.model; i<len; i++){
+      for (var i = 0, len = this.model.length; i<len; i++){
         if(matchingFunc(this.model[i])) retArr.push(this.model[i]);
       }
 
       return retArr;
     },
 
+    /**
+     * Returns first-found match based on function's check
+     * 
+     * @param {Function} Function used to determine match, receives [item in model array]
+     */
     first: function(matchingFunc) {
       for (var i = 0, len = this.model.length; i<len; i++){
         if(matchingFunc(this.model[i])) return this.model[i];
@@ -87,6 +92,12 @@ function Supermarket(stock) {
   };
 }
 
+/**
+ * Class for handling discounting of merchandise
+ * 
+ * @param {Collection} productCollection The collection of products being purchased
+ * @param {Collection} discountCollection the collection of discounts available
+ */
 function Discounter(productCollection, discountCollection) {
   return {
     checkedItems: productCollection,
